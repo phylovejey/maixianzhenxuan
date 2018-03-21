@@ -1,0 +1,46 @@
+<!--index.wxml-->
+<view class = "container">
+<!-- search -->
+<view class ="search"><input class ="searchline"></input> 
+  <view class = "icon-search">
+  </view>
+</view>
+<!-- search end -->
+<!-- banner start -->
+  <view class = "banner">
+    <swiper indicator-dots='true' autoplay="true" class="swiper">
+      <block wx:for="{{bannerItems}}" wx:item="item" wx:key="key">
+        <swiper-item class="swiper-item">
+          <image src="{{item.url}}">
+          </image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!-- banner end -->
+  <view class ="menu">
+    <view class ="menu-item"  bindtap ="showList" wx:for="{{menuitem}}" wx:key ="key">
+      <view class ="{{item.icon}}"></view>
+      <text>{{item.text}}</text>
+    </view>
+  </view>
+  <!-- menu end -->
+  <!-- list start -->
+  <block class ="lists-box">
+  <view wx:for="{{list}}" wx:key="" class="item-box" bindtap="showGoodsDetail" data-id="{{item._id}}">
+    <view class="item-img">
+      <image src="{{item.itemthumbnailspic}}"></image>
+    </view>
+    <text class ="item-title">"{{item.itemname}}"</text>
+    <text class ="item-content">{{item.itemnamedes}}</text>
+    <view class ="item-btm">
+      <view class ="item-buy-people">
+        <view class="iconfont-icon-people"></view>
+     {{item.groupnum}}人团
+      </view>
+        <view class ="item-price">￥168</view>
+    </view>
+    </view>
+  </block>
+  <!-- list end -->
+</view>

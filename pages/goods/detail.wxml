@@ -1,0 +1,200 @@
+ <scroll-view scorll-y="true" class="scroll-view-y" scroll-with-animation="true" scroll-top="{{scrollTop}}" lower-threshold="50" bindscrolltolower="scrolltolower" style="height:{{winddowHeight-50}}px"> 
+
+
+
+<swiper class="swiper" autoplay="true" circular="true"> 
+	<block wx:for="{{album}}" wx:item ="item" wx:key="key">
+	<swiper-item>  
+	    <image  src="{{item.url}}" mode="aspectFill" ></image>   
+	</swiper-item>
+	</block>
+</swiper>   
+
+<view class="goods-item bg-fff">
+  <view class="pull-left g-left">
+    <text class="goods-price">￥{{goodsDetail.itemgroupprice}}</text>
+    <text class="origin-price">￥{{goodsDetail.itemcurrentprice}}</text>
+    <view class ="goods-sale">
+  已团{{goodsDetail.sales}}件{{goodsDetail.groupnum}}人团
+    </view>
+  </view>
+  <view class="icon-share text-center pull-right">
+    <image src='https://res.ccyangche.com/images/share.png'></image>
+    <view class ="share-text">分享</view>
+  </view>
+  <button open-type='share' class ="share-btn pull-right"></button>
+  <view class="clearfix"></view>
+  <view class="goods-title bg-fff">{{goodsDetail.itemname}}</view>
+  <view class="goods-brief bg-fff">{{goodsDetail.itemnamedes}}</view>
+</view>
+<view class = "server" bindtap='showServer'data-statu="open">
+ <image src="https://res.ccyangche.com/images/yes.png"></image><text>本市包邮</text>
+    <image src="https://res.ccyangche.com/images/yes.png"></image><text>7天退换</text>
+    <image src="https://res.ccyangche.com/images/yes.png"></image><text>全场48小时发货</text>
+    <image src="https://res.ccyangche.com/images/yes.png"></image><text>假一赔十</text>
+    <view class="pull-right right"><image src ="https://res.ccyangche.com/images/left-b.png"></image></view>
+</view>
+
+<view wx:if="{{groupList.length>0}}">
+  <view class="bg-fff mt-20 p-20">小伙伴们正在开团</view>
+  <block wx:for="{{groupList}}" wx:key="unique">
+  <view class ="pull-left group-item bg-fff" bindtap="joinGroup" data-id="{{item.oid}}">
+  <view class ="pull-left user-img">
+  <image src="{{item.avastarUrl}}" mode="aspectFill"></image>
+  </view>
+  <view class ="group-user pull-left">
+    <view class ="user-name">{{item.nickName}}</view>
+    <view class ="left-time">还差{{goodsDetail.groupNum-1-item.leftNum}}人，剩余{{item.leftTimeStr}}</view>
+  </view>
+  <view class="pull-right btn">去参团</view>
+  </view>
+  <view class ="clearfix"></view>
+  </block>
+</view>
+
+
+<!-- error start -->
+<view class="otherAddress">
+    <text>新疆 西藏 青海 云南 贵州 海南 宁夏 甘肃 内蒙古 港澳台 海外地区商家不支持发货,请勿下单,我们会尽快争取让这些地区的朋友参与到拼购,谢谢支持:)</text>
+    <text>商品成团后在不缺货情况下72小时内发货;请确保收件人电话和地址填写无误以及手机畅通;</text>
+    <text>商家默认快递无法更改,请勿留言指定快递。</text>
+</view>
+<!-- / error end -->
+
+<!-- group play start -->
+<view class="groud-play-box">
+    <view class="title-box">拼团玩法</view>
+    <view class="group-play-content">
+        <view class="group-play-item">
+            <view class="group-play-img"></view>
+            <view>
+                <text>付款开团</text>
+                <text>或参团</text>
+            </view>
+        </view>
+
+        <view class="group-play-item group-play-center">
+            <view class="group-play-img "></view>
+            <view>
+                <text>分享给好友</text>
+                <text>邀请参团</text>
+            </view>
+        </view>
+
+        <view class="group-play-item group-play-last">
+            <view>
+                <text>达到人数</text>
+                <text>顺利开团</text>
+            </view>
+            <view class="group-play-img"></view>
+        </view>
+    </view>
+</view>
+<!-- / group play end -->
+
+<view class="fight-group-title">*开团并邀请好友参团，24小时内人数不足自动退款</view>
+
+<!-- fight group start -->
+<block wx:if="{{group}}">
+    <view class="fight-group">
+        <view class="title-box">懒人凑团挤一挤</view>
+        <view class="group-list">
+            <navigator wx:for="{{group}}" url="../group/group?id={{item.groupId}}" class="bordrer-top" wx:key="item.id">
+                <view class="item-group">
+                    <image src="{{item.userImg}}" class="user-img"></image>
+                    <view class="group-item-center">
+                        <text class="user-name">{{item.userName}}</text>
+                        <view class="group-other">剩余<text class="red-color">{{item.endTime}}</text>结束 仅差<text class="red-color">{{item.gap}}</text>人</view>
+                    </view>
+                    <view class="join-group">参团</view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</block>
+<!-- / fight group end -->
+
+<!-- goods detail start -->
+<view class ="goods-desc bg-fff"><view>商品详情</view></view>
+
+<!-- 商品详情 -->
+<view class="goods-detail">
+  <video src="" width="100%"></video>
+  <image src="{{goodsDetail.itemdetailpic1}}"></image>
+  <image src="{{goodsDetail.itemdetailpic2}}"></image>
+  <image src="{{goodsDetail.itemdetailpic3}}"></image>
+  <image src="{{goodsDetail.itemdetailpic4}}"></image>
+  <image src="{{goodsDetail.itemdetailpic5}}"></image>
+</view>
+
+
+<!-- / goods detail end -->
+
+ </scroll-view> 
+
+<view class ="footer">
+  <view class ="index" bindtap="goHome">
+  <image src="https://res.ccyangche.com/images/index.png" mode="aspectFill"></image>
+  <view class="mt-10">首页</view>
+  </view>
+
+   <view class ="index" bindtap="collect" data-status="{{is_collect}}">
+  <image src="{{is_collect ? 'https://res.ccyangche.com/images/collected.png':'https://res.ccyangche.com/images/collect.png'}}" mode="aspectFill"></image>
+  <view class="mt-10">收藏</view>
+  </view>
+
+  <view class ="buy-group pull-right" bindtap="showModal" data-status="open" data-type="group">
+  <view>￥{{goodsDetail.itemgroupprice}}</view>
+  <view class="mt-10">一键开团</view>
+  </view>
+
+   <view class ="buy-only pull-right" bindtap="showModal" data-status="open" data-type="only">
+    <view>￥{{goodsDetail.itemcurrentprice}}</view>
+  <view class="mt-10">单独购买</view>
+  </view>
+</view>
+
+
+<view class="drawer_screen" bindtap="showModal" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<view class="modal" animation="{{animationData}}" wx:if="{{showModalStatus}}" >
+	<text class="modal-close pull-right" bindtap="showModal" data-statu="close">x</text>
+	<view class="clearfix"></view>
+	<view class="modal-title">
+		<view class="goods-img"><image src="{{goodsDetail.itembannerpic}}" mode="aspectFit"></image></view>
+		<view class="goods-price">¥{{goodsPrice}}</view>
+	</view>
+	<view class="modal-body">
+		<view class="prop" wx:for="{{goodsDetail.property}}" wx:key="unique" wx:for-index="index">
+			<view class="prop-name">{{item.name}}</view>
+			<block wx:for="{{item.value}}" wx:key="unique" wx:for-item="prop" wx:for-index="ind">
+				<text class="{{propValue[index].pname==item.name&&propValue[index].name==prop ?'selected':''}}" data-pid="{{index}}" data-pname="{{item.name}}" data-name="{{prop}}" bindtap="selectProp">{{prop}}</text>
+			</block>
+		</view>
+	</view>
+	<view class="number pull-left">
+		<text class="pull-left" style="padding-left: 24rpx;">数量</text>
+		<text class="plus pull-right" bindtap="plus">十</text>
+		<text class="buy-value pull-right">{{num}}</text>
+		<text class="minus pull-right" bindtap="minus">一</text>
+	</view>
+	<view class="modal-footer">
+		<view class="btn" bindtap="goToBuy">确定</view>
+	</view>
+</view>
+
+<view class="drawer_screen" bindtap="showServer" data-statu="close" wx:if="{{showServer}}"></view>
+<view class="modal" animation="{{animationData}}" wx:if="{{showServer}}" >
+	<text class="modal-close pull-right" bindtap="showModal" data-statu="close">x</text>
+	<view class="clearfix"></view>
+	<view class="modal-title">
+		<view class="text-center">
+			<text class="">服务说明</text>
+		</view>
+	</view>
+	<view class="modal-body">
+
+	</view>
+</view>
+
+
+
